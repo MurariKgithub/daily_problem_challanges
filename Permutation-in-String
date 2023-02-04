@@ -1,0 +1,27 @@
+// one another optimal way to solve it on pattern macthing basis ill try when i finish it
+class Solution {
+public:
+    bool checkInclusion(string p, string s) {
+       map<char,int> pmap,smap;
+        vector<int> ans;
+        if(p.size()>s.size()) return false;
+        for(int i =0;i<p.size() ;i++){
+            pmap[p[i]]++;
+            smap[s[i]]++;
+        }
+        int right =p.size()-1;
+        int left =0;
+        while(right<s.size()){
+            // cout<<left<<" "<<right<<endl;
+            // for(auto it:smap) cout<<it.first<<" "<<it.second<<endl;
+            if(pmap==smap) return true;
+            if(smap[s[left]]==1) smap.erase(s[left]);
+            else smap[s[left]] -=1;
+            right++;
+            left++;
+            smap[s[right]]+=1;
+        }
+        // for(auto it:ans) cout<<it<<" ";
+        return false; 
+    }
+};
